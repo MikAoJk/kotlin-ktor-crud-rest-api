@@ -1,0 +1,7 @@
+.idea
+.gradle
+build
+.DS_Store
+
+# Kotlin 2.0
+.kotlin/

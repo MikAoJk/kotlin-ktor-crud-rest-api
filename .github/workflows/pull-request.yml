@@ -1,0 +1,16 @@
+name: build pull request
+
+on: [pull_request]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-java@v4
+              with:
+                  distribution: 'temurin'
+                  java-version: '21'
+                  cache: 'gradle'
+            - name: test
+              run: ./gradlew test
