@@ -51,7 +51,7 @@ Creating a docker image should be as simple as
 docker build -t kotlinktorapp .
 ```
 
-##### 👟 Run all the needed servisces
+##### 👟 Run all the needed services
 ```bash script
 docker compose up
 ```
