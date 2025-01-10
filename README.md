@@ -123,6 +123,6 @@ Want to add a feature? see [CONTRIBUTING](CONTRIBUTING.md)
 
 This project is maintained by [CODEOWNERS](CODEOWNERS)
 
-Questions please create an
+Questions? please create an
 [issue](https://github.com/MikAoJk/kotlin-ktor-crud-rest-api/issues)
 
