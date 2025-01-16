@@ -10,7 +10,7 @@ val jacksonVersion = "2.18.2"
 val hikariCPVersion = "6.1.0"
 val flywayVersion = "11.1.0"
 val otjPgEmbeddedVersion = "1.1.0"
-val postgresVersion = "42.7.4"
+val postgresVersion = "42.7.5"
 
 // transient deps
 val commonsCompressVersion = "1.27.1"
