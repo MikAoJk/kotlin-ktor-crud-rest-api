@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 group = "io.github.MikAoJk"
 version = "1.0.0"
 
@@ -13,22 +11,12 @@ val hikariCPVersion = "6.1.0"
 val flywayVersion = "11.1.0"
 val otjPgEmbeddedVersion = "1.1.0"
 val postgresVersion = "42.7.4"
-val ktfmtVersion = "0.44"
-
-val javaVersion = JvmTarget.JVM_21
 
 // transient deps
 val commonsCompressVersion = "1.27.1"
 
 plugins {
-    id("application")
     kotlin("jvm") version "2.1.0"
-    id("com.diffplug.spotless") version "6.25.0"
-    id("com.gradleup.shadow") version "8.3.5"
-}
-
-application {
-    mainClass.set("io.github.mikaojk.ApplicationKt")
 }
 
 repositories {
@@ -36,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    implementation(kotlin("stdlib"))
 
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
@@ -44,7 +32,6 @@ dependencies {
     implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
     implementation("io.ktor:ktor-server-swagger:$ktorVersion")
     implementation("io.ktor:ktor-server-cors:$ktorVersion")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
 
     implementation("com.zaxxer:HikariCP:$hikariCPVersion")
     compileOnly("org.flywaydb:flyway-core:$flywayVersion")
@@ -58,7 +45,6 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
     testImplementation("com.opentable.components:otj-pg-embedded:$otjPgEmbeddedVersion")
     constraints {
@@ -71,42 +57,36 @@ dependencies {
 
 
 kotlin {
-    compilerOptions {
-        jvmTarget.set(javaVersion)
-    }
+    jvmToolchain(21)
 }
 
 tasks {
 
-    shadowJar {
-        mergeServiceFiles {
-            setPath("META-INF/services/org.flywaydb.core.extensibility.Plugin")
-        }
+    withType<Jar> {
         archiveBaseName.set("app")
-        archiveClassifier.set("")
-        isZip64 = true
+
         manifest {
-            attributes(
-                mapOf(
-                    "Main-Class" to "io.github.mikaojk.ApplicationKt",
-                ),
-            )
+            attributes["Main-Class"] = "io.github.mikaojk.ApplicationKt"
+            attributes["Class-Path"] = configurations.runtimeClasspath.get().joinToString(separator = " ") {
+                it.name
+            }
+        }
+
+        doLast {
+            configurations.runtimeClasspath.get().forEach {
+                val file = File("${layout.buildDirectory.get()}/libs/${it.name}")
+                if (!file.exists())
+                    it.copyTo(file)
+            }
         }
     }
 
-    test {
+    withType<Test> {
         useJUnitPlatform {}
         testLogging {
             showStandardStreams = true
             showStackTraces = true
             exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
-        }
-    }
-
-    spotless {
-        kotlin { ktfmt(ktfmtVersion).kotlinlangStyle() }
-        check {
-            dependsOn("spotlessApply")
         }
     }
 

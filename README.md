@@ -34,7 +34,7 @@ curl --version
 ### Build code
 Build the code without running it
 ```bash script
-./gradlew shadowJar
+./gradlew jar
 ```
 
 ### Test code
