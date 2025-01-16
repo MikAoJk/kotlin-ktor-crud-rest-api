@@ -1,6 +1,11 @@
 name: build pull request
 
-on: [pull_request]
+on:
+   pull_request:
+     types:
+       - opened
+       - reopened
+       - edited
 
 jobs:
     build:
@@ -12,5 +17,5 @@ jobs:
                   distribution: 'temurin'
                   java-version: '21'
                   cache: 'gradle'
-            - name: test
-              run: ./gradlew test
+            - name: Test & build
+              run: ./gradlew test build
