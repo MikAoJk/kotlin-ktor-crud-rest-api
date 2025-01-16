@@ -90,4 +90,8 @@ tasks {
         }
     }
 
+    withType<Wrapper> {
+        gradleVersion = "8.12"
+    }
+
 }
