@@ -6,6 +6,7 @@ on:
        - opened
        - reopened
        - edited
+   workflow_dispatch:    
 
 jobs:
     build:
