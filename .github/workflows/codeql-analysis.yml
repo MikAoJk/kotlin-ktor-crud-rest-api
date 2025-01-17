@@ -33,7 +33,7 @@ jobs:
           distribution: "temurin"
           java-version: "21"
 
-        name: Gradle build
+      - name: Gradle build
         run: ./gradlew build -x test
       
       - uses: github/codeql-action/analyze@v3
