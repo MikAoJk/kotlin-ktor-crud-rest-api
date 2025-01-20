@@ -1,6 +1,6 @@
-package io.github.mikaojk
+package io.github.mikaojk.util
 
-import com.opentable.db.postgres.embedded.EmbeddedPostgres
+import io.zonky.test.db.postgres.embedded.EmbeddedPostgres
 import io.github.mikaojk.db.DatabaseInterface
 import java.sql.Connection
 import org.flywaydb.core.Flyway

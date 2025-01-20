@@ -3,8 +3,8 @@ package io.github.mikaojk.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import io.github.mikaojk.TestDB
-import io.github.mikaojk.dropData
+import io.github.mikaojk.util.TestDB
+import io.github.mikaojk.util.dropData
 import io.github.mikaojk.services.UserRequest
 import io.github.mikaojk.services.UserService
 import io.ktor.client.request.*

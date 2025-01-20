@@ -9,11 +9,9 @@ val kotlinVersion = "2.1.0"
 val jacksonVersion = "2.18.2"
 val hikariCPVersion = "6.2.1"
 val flywayVersion = "11.1.1"
-val otjPgEmbeddedVersion = "1.1.0"
+val embeddedPostgresVersion = "2.0.7"
 val postgresVersion = "42.7.5"
 
-// transient deps
-val commonsCompressVersion = "1.27.1"
 
 plugins {
     kotlin("jvm") version "2.1.0"
@@ -46,12 +44,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
-    testImplementation("com.opentable.components:otj-pg-embedded:$otjPgEmbeddedVersion")
-    constraints {
-        testImplementation("org.apache.commons:commons-compress:$commonsCompressVersion") {
-            because("override transient from com.opentable.components:otj-pg-embedded")
-        }
-    }
+    testImplementation("io.zonky.test:embedded-postgres:$embeddedPostgresVersion")
     testImplementation("io.ktor:ktor-client-content-negotiation-jvm:$ktorVersion")
 }
 
