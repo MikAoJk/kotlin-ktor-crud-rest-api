@@ -3,10 +3,12 @@ package io.github.mikaojk.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import io.github.mikaojk.services.UserInDB
 import io.github.mikaojk.util.TestDB
 import io.github.mikaojk.util.dropData
 import io.github.mikaojk.services.UserRequest
 import io.github.mikaojk.services.UserService
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders.Accept as AcceptHeader
@@ -64,6 +66,42 @@ internal class UserApiTest {
                 }
 
             assertEquals(response.status, HttpStatusCode.OK)
+        }
+    }
+
+    @Test
+    internal fun `Returns all users in db`() {
+        testApplication {
+            application {
+                routing { registerUserApi(userService) }
+
+                install(ContentNegotiationServer) {
+                    jackson {
+                        registerKotlinModule()
+                        configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                    }
+                }
+            }
+
+
+            val userRequestJoakim = UserRequest("Joakim", "joakimkartveit@gmail.com")
+            userService.saveUser(userRequestJoakim)
+            val userRequestPer = UserRequest("Per", "per@gmail.com")
+            userService.saveUser(userRequestPer)
+
+            val client = createClient {
+                install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
+                    jackson {
+                        registerKotlinModule()
+                    }
+                }
+            }
+
+
+            val response = client.get("/users")
+
+            assertEquals(response.status, HttpStatusCode.OK)
+            assertEquals(response.body<List<UserInDB>>().size, 2)
         }
     }
 }
