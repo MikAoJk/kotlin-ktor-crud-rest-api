@@ -7,7 +7,7 @@ val logbackVersion = "1.5.17"
 val logstashEncoderVersion = "8.0"
 val kotlinVersion = "2.1.0"
 val hikariCPVersion = "6.2.1"
-val flywayVersion = "11.3.4"
+val flywayVersion = "11.4.0"
 val embeddedPostgresVersion = "2.1.0"
 val postgresVersion = "42.7.5"
 
