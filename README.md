@@ -111,13 +111,13 @@ http://localhost:8080/openapi
 
 ### Upgrading the gradle wrapper
 Find the newest version of gradle here: https://gradle.org/releases/ Then run this command:
-(Remeber to repealce $gradleVersjon with the newest version)
+> **_NOTE:_** (Remember to replace $gradleVersjon with the newest version of gradle)
 ```shell script
 ./gradlew wrapper --gradle-version $gradleVersjon
 ```
 
 ### Contribute
-Want to add a feature? see [CONTRIBUTING](CONTRIBUTING.md)
+Want to add a feature or just some other improvements? see [CONTRIBUTING](CONTRIBUTING.md)
 
 ### Contact
 
@@ -125,4 +125,3 @@ This project is maintained by [CODEOWNERS](CODEOWNERS)
 
 Questions? please create an
 [issue](https://github.com/MikAoJk/kotlin-ktor-crud-rest-api/issues)
-
