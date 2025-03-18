@@ -1,6 +1,8 @@
 group = "io.github.MikAoJk"
 version = "1.0.0"
 
+val javaVersion = 21
+
 val ktorVersion = "3.1.1"
 val junitJupiterVersion = "5.12.1"
 val logbackVersion = "1.5.17"
@@ -21,8 +23,10 @@ repositories {
 }
 
 dependencies {
+    //Kotlin
     implementation(kotlin("stdlib"))
 
+    //Ktor
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
     implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
@@ -30,14 +34,17 @@ dependencies {
     implementation("io.ktor:ktor-server-swagger:$ktorVersion")
     implementation("io.ktor:ktor-server-cors:$ktorVersion")
 
+    // DB
     implementation("com.zaxxer:HikariCP:$hikariCPVersion")
     compileOnly("org.flywaydb:flyway-core:$flywayVersion")
     implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
     implementation("org.postgresql:postgresql:$postgresVersion")
 
+    //Logs
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashEncoderVersion")
 
+    //Test dependencies
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
@@ -50,7 +57,7 @@ dependencies {
 
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(javaVersion)
 }
 
 tasks {
@@ -77,14 +84,11 @@ tasks {
     withType<Test> {
         useJUnitPlatform {}
         testLogging {
+            events("passed", "skipped", "failed")
             showStandardStreams = true
             showStackTraces = true
             exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         }
-    }
-
-    withType<Wrapper> {
-        gradleVersion = "8.12"
     }
 
 }

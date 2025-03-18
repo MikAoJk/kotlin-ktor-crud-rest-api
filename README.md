@@ -107,11 +107,14 @@ curl --location --request DELETE 'http://localhost:8080/user/3'
 ```
 
 #### Api documentation
+The api documentation is available here
+> **_NOTE:_** The application has to be running
+
 http://localhost:8080/openapi
 
 ### Upgrading the gradle wrapper
 Find the newest version of gradle here: https://gradle.org/releases/ Then run this command:
-> **_NOTE:_** (Remember to replace $gradleVersjon with the newest version of gradle)
+> **_NOTE:_** Remember to replace $gradleVersjon with the newest version of gradle
 ```shell script
 ./gradlew wrapper --gradle-version $gradleVersjon
 ```
