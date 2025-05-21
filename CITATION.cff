@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "kotlin-ktor-crud-rest-api"
+authors:
+  - family-names: "Kartveit"
+    given-names: "Joakim"
+    orcid: ""
+    affiliation: ""
+date-released: "2025-01-08"
+version: "main"
+repository-code: "https://github.com/MikAoJk/kotlin-ktor-crud-rest-api"
+license: "MIT"
+url: "https://github.com/MikAoJk/kotlin-ktor-crud-rest-api"
+abstract: "Simple CRUD Rest API in Kotlin built with Ktor."
