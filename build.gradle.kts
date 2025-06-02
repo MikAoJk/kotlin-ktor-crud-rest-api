@@ -11,7 +11,7 @@ val kotlinVersion = "2.1.10"
 val hikariCPVersion = "6.3.0"
 val flywayVersion = "11.8.2"
 val embeddedPostgresVersion = "2.1.0"
-val postgresVersion = "42.7.5"
+val postgresVersion = "42.7.6"
 
 
 plugins {
