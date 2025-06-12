@@ -3,11 +3,10 @@ version = "1.0.0"
 
 val javaVersion = 21
 
-val ktorVersion = "3.1.3"
+val ktorVersion = "3.2.0"
 val junitJupiterVersion = "5.13.1"
 val logbackVersion = "1.5.18"
 val logstashEncoderVersion = "8.1"
-val kotlinVersion = "2.1.10"
 val hikariCPVersion = "6.3.0"
 val flywayVersion = "11.9.1"
 val embeddedPostgresVersion = "2.1.0"
@@ -34,7 +33,7 @@ dependencies {
     implementation("io.ktor:ktor-server-swagger:$ktorVersion")
     implementation("io.ktor:ktor-server-cors:$ktorVersion")
 
-    // DB
+    // Database
     implementation("com.zaxxer:HikariCP:$hikariCPVersion")
     compileOnly("org.flywaydb:flyway-core:$flywayVersion")
     implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
