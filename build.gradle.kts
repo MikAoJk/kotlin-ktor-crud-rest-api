@@ -15,6 +15,11 @@ val postgresVersion = "42.7.7"
 
 plugins {
     kotlin("jvm") version "2.2.10"
+    id("application")
+}
+
+application {
+    mainClass.set("io.github.mikaojk.ApplicationKt")
 }
 
 repositories {
@@ -60,26 +65,6 @@ kotlin {
 }
 
 tasks {
-
-    withType<Jar> {
-        archiveBaseName.set("app")
-
-        manifest {
-            attributes["Main-Class"] = "io.github.mikaojk.ApplicationKt"
-            attributes["Class-Path"] = configurations.runtimeClasspath.get().joinToString(separator = " ") {
-                it.name
-            }
-        }
-
-        doLast {
-            configurations.runtimeClasspath.get().forEach {
-                val file = File("${layout.buildDirectory.get()}/libs/${it.name}")
-                if (!file.exists())
-                    it.copyTo(file)
-            }
-        }
-    }
-
     withType<Test> {
         useJUnitPlatform {}
         testLogging {
