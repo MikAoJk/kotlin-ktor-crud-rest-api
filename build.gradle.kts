@@ -8,7 +8,7 @@ val junitJupiterVersion = "5.13.4"
 val logbackVersion = "1.5.18"
 val logstashEncoderVersion = "8.1"
 val hikariCPVersion = "7.0.1"
-val flywayVersion = "11.11.1"
+val flywayVersion = "11.11.2"
 val embeddedPostgresVersion = "2.1.0"
 val postgresVersion = "42.7.7"
 
