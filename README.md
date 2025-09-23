@@ -1,15 +1,6 @@
 # kotlin-ktor-crud-rest-api
 Simple application to showcase a CRUD Rest API application in Kotlin
 
-## Technologies used
-* JDK 21
-* Kotlin
-* Gradle
-* Docker
-* Ktor
-* Postgres
-* Curl
-
 ### Prerequisites
 Make sure you have the Java JDK 21 installed
 You can check which version you have installed using this command:
