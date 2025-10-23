@@ -27,8 +27,6 @@ repositories {
 }
 
 dependencies {
-    //Kotlin
-    implementation(kotlin("stdlib"))
 
     //Ktor
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
