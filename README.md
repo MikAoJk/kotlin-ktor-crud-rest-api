@@ -2,7 +2,7 @@
 Simple application to showcase a CRUD Rest API application in Kotlin
 
 ### Prerequisites
-Make sure you have the Java JDK 21 installed
+Make sure you have the Java JDK 25 installed
 You can check which version you have installed using this command:
 ``` bash script
 java -version

@@ -1,7 +1,7 @@
 group = "io.github.MikAoJk"
 version = "1.0.0"
 
-val javaVersion = 21
+val javaVersion = 25
 
 val ktorVersion = "3.3.1"
 val junitJupiterVersion = "6.0.0"
@@ -14,7 +14,7 @@ val postgresVersion = "42.7.8"
 
 
 plugins {
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version "2.3.0-Beta2"
     id("application")
 }
 
