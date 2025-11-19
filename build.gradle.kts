@@ -14,7 +14,7 @@ val postgresVersion = "42.7.8"
 
 
 plugins {
-    kotlin("jvm") version "2.3.0-Beta2"
+    kotlin("jvm") version "2.3.0-RC"
     id("application")
 }
 
@@ -36,7 +36,7 @@ dependencies {
     implementation("io.ktor:ktor-server-swagger:$ktorVersion")
     implementation("io.ktor:ktor-server-cors:$ktorVersion")
 
-    // Database
+    //Database
     implementation("com.zaxxer:HikariCP:$hikariCPVersion")
     compileOnly("org.flywaydb:flyway-core:$flywayVersion")
     implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
