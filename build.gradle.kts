@@ -3,12 +3,12 @@ version = "1.0.0"
 
 val javaVersion = 25
 
-val ktorVersion = "3.3.2"
+val ktorVersion = "3.3.3"
 val junitJupiterVersion = "6.0.1"
 val logbackVersion = "1.5.21"
 val logstashEncoderVersion = "9.0"
 val hikariCPVersion = "7.0.2"
-val flywayVersion = "11.17.2"
+val flywayVersion = "11.18.0"
 val embeddedPostgresVersion = "2.2.0"
 val postgresVersion = "42.7.8"
 
