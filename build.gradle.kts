@@ -1,7 +1,7 @@
 group = "io.github.MikAoJk"
 version = "1.0.0"
 
-val javaVersion = 21
+val javaVersion = 25
 
 val ktorVersion = "3.3.3"
 val junitJupiterVersion = "6.0.1"
@@ -14,7 +14,7 @@ val postgresVersion = "42.7.8"
 
 
 plugins {
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version "2.3.0"
     id("application")
 }
 
@@ -36,7 +36,7 @@ dependencies {
     implementation("io.ktor:ktor-server-swagger:$ktorVersion")
     implementation("io.ktor:ktor-server-cors:$ktorVersion")
 
-    // Database
+    //Database
     implementation("com.zaxxer:HikariCP:$hikariCPVersion")
     compileOnly("org.flywaydb:flyway-core:$flywayVersion")
     implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
