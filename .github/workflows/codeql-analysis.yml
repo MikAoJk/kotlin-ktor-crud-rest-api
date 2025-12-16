@@ -25,7 +25,6 @@ jobs:
       - uses: github/codeql-action/init@v4
         with:
           languages: kotlin
-          tools: latest
           
       - uses: actions/setup-java@v5
         id: setup-java
