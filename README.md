@@ -110,9 +110,6 @@ Find the newest version of gradle here: https://gradle.org/releases/ Then run th
 ./gradlew wrapper --gradle-version $gradleVersjon
 ```
 
-### Contribute
-Want to add a feature or just some other improvements? see [CONTRIBUTING](CONTRIBUTING.md)
-
 ### Contact
 
 This project is maintained by [CODEOWNERS](CODEOWNERS)
