@@ -5,7 +5,7 @@ val javaVersion = 25
 
 val ktorVersion = "3.5.2"
 val junitJupiterVersion = "6.1.3"
-val logbackVersion = "1.6.1"
+val logbackVersion = "1.6.3"
 val logstashEncoderVersion = "9.0"
 val hikariCPVersion = "7.1.0"
 val flywayVersion = "13.3.0"
@@ -30,7 +30,7 @@ dependencies {
 
     //Ktor
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-jackson3-jvm:${ktorVersion}")
     implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
     implementation("io.ktor:ktor-server-swagger:$ktorVersion")
