@@ -1,7 +1,6 @@
 package io.github.mikaojk
 
 import io.github.mikaojk.plugins.configureContentNegotiation
-import io.github.mikaojk.plugins.configureCors
 import io.github.mikaojk.plugins.configureLifecycleHooks
 import io.github.mikaojk.plugins.configureRouting
 import io.github.mikaojk.plugins.configureStatusPages
@@ -26,7 +25,6 @@ fun main() {
 fun Application.module() {
     configureStatusPages()
     configureContentNegotiation()
-    configureCors()
     configureRouting()
     configureLifecycleHooks()
 }
