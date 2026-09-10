@@ -14,7 +14,7 @@ val postgresVersion = "42.7.13"
 
 
 plugins {
-    kotlin("jvm") version "2.4.10"
+    kotlin("jvm") version "2.4.20"
     id("application")
 }
 
