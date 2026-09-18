@@ -44,7 +44,7 @@ docker build -t kotlinktorapp .
 
 ##### 👟 Run all the needed services and the application
 ```bash script
-docker compose up
+docker compose up -d
 ```
 
 ##### 🧪 Test the applications endpoints
