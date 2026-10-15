@@ -10,7 +10,7 @@ val logstashEncoderVersion = "9.0"
 val hikariCPVersion = "7.1.0"
 val flywayVersion = "13.9.0"
 val embeddedPostgresVersion = "2.2.2"
-val postgresVersion = "42.7.13"
+val postgresVersion = "42.7.14"
 
 
 plugins {
