@@ -30,9 +30,8 @@ private suspend fun ApplicationCall.receiveUser(): UserRequest {
     return UserRequest(name.stringValue(), email.stringValue())
 }
 
-// Rust labels success messages as JSON, but sends them as unquoted bytes.
-// Its error responses have no Content-Type header.
-suspend fun ApplicationCall.respondRustMessage(status: HttpStatusCode, message: String) {
+
+suspend fun ApplicationCall.respondRawMessage(status: HttpStatusCode, message: String) {
     respond(object : OutgoingContent.ByteArrayContent() {
         override val status = status
         override val contentType = if (status == HttpStatusCode.OK) ContentType.Application.Json else null
@@ -43,31 +42,31 @@ suspend fun ApplicationCall.respondRustMessage(status: HttpStatusCode, message: 
 fun Routing.registerUserApi(userService: UserService) {
     post("/users") {
         userService.saveUser(call.receiveUser())
-        call.respondRustMessage(HttpStatusCode.OK, "User created")
+        call.respondRawMessage(HttpStatusCode.OK, "User created")
     }
     get("/users") {
-        call.respondRustMessage(HttpStatusCode.OK, jsonMapper.writeValueAsString(userService.getAllUsers()))
+        call.respondRawMessage(HttpStatusCode.OK, jsonMapper.writeValueAsString(userService.getAllUsers()))
     }
     get("/users/{id}") {
         val userId = call.parameters["id"]!!.toInt()
         val user = userService.getUserById(userId)
         if (user == null) {
-            call.respondRustMessage(HttpStatusCode.NotFound, "User not found")
+            call.respondRawMessage(HttpStatusCode.NotFound, "User not found")
         } else {
-            call.respondRustMessage(HttpStatusCode.OK, jsonMapper.writeValueAsString(user))
+            call.respondRawMessage(HttpStatusCode.OK, jsonMapper.writeValueAsString(user))
         }
     }
     put("/users/{id}") {
         val userId = call.parameters["id"]!!.toInt()
         userService.updateUser(call.receiveUser(), userId)
-        call.respondRustMessage(HttpStatusCode.OK, "User updated")
+        call.respondRawMessage(HttpStatusCode.OK, "User updated")
     }
     delete("/users/{id}") {
         val userId = call.parameters["id"]!!.toInt()
         if (userService.deleteUserById(userId)) {
-            call.respondRustMessage(HttpStatusCode.OK, "User deleted")
+            call.respondRawMessage(HttpStatusCode.OK, "User deleted")
         } else {
-            call.respondRustMessage(HttpStatusCode.NotFound, "User not found")
+            call.respondRawMessage(HttpStatusCode.NotFound, "User not found")
         }
     }
 }

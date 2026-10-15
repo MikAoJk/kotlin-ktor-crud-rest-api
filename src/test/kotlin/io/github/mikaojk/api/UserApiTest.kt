@@ -54,7 +54,7 @@ internal class UserApiTest {
     }
 
     @Test
-    internal fun `CRUD responses match Rust and mutations persist`() = testApplication {
+    internal fun `CRUD responses mutations persist`() = testApplication {
         configureApi()
         val created = client.post("/users") {
             setBody("""{"name":"Original","email":"original@example.com"}""")
@@ -89,7 +89,7 @@ internal class UserApiTest {
     }
 
     @Test
-    internal fun `Invalid input and unknown routes match Rust errors`() = testApplication {
+    internal fun `Invalid input and unknown routes match errors`() = testApplication {
         configureApi()
         for (id in listOf("invalid", "2147483648")) {
             for (response in listOf(
