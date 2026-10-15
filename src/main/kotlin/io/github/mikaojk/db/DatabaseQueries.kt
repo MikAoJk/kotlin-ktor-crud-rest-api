@@ -52,7 +52,7 @@ fun DatabaseInterface.getUserById(id: Int): UserInDB? =
 
 fun DatabaseInterface.updateUser(userRequest: UserRequest, userId: Int) =
     connection.use { connection ->
-        connection
+        val updated = connection
             .prepareStatement(
                 """
               UPDATE users 
@@ -64,13 +64,15 @@ fun DatabaseInterface.updateUser(userRequest: UserRequest, userId: Int) =
                 preparedStatement.setString(2, userRequest.email)
                 preparedStatement.setInt(3, userId)
 
-                preparedStatement.executeQuery().next()
+                preparedStatement.executeUpdate() > 0
             }
+        connection.commit()
+        updated
     }
 
 fun DatabaseInterface.deleteUser(id: Int) =
     connection.use { connection ->
-        connection
+        val deleted = connection
             .prepareStatement(
                 """
                 DELETE FROM users
@@ -79,8 +81,10 @@ fun DatabaseInterface.deleteUser(id: Int) =
             )
             .use { preparedStatement ->
                 preparedStatement.setInt(1, id)
-                preparedStatement.executeQuery().next()
+                preparedStatement.executeUpdate() > 0
             }
+        connection.commit()
+        deleted
     }
 
 fun ResultSet.toUser(): UserInDB =

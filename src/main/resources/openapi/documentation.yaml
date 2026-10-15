@@ -6,181 +6,113 @@ info:
 servers:
 - url: "https://kotlin_ktor_crud_rest_api"
 paths:
-  /user:
-    post:
-      description: ""
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "User saved"
-        "500":
-          description: "Internal Server Error"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: ""
   /users:
-    get:
-      description: ""
+    post:
+      requestBody:
+        $ref: "#/components/requestBodies/User"
       responses:
         "200":
-          description: "OK"
+          description: "Unquoted body: User created"
           content:
-            '*/*':
+            application/json:
               schema:
-                type: "array"
+                type: string
+              example: "User created"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    get:
+      responses:
+        "200":
+          description: "All users"
+          content:
+            application/json:
+              schema:
+                type: array
                 items:
                   $ref: "#/components/schemas/UserInDB"
+        "500":
+          $ref: "#/components/responses/InternalError"
   /users/{id}:
-    delete:
-      description: ""
-      parameters:
-      - name: "id"
-        in: "path"
+    parameters:
+      - name: id
+        in: path
         required: true
         schema:
-          type: "integer"
-      responses:
-        "400":
-          description: "Bad Request"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "id parameter is required"
-        "404":
-          description: "Not Found"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: ""
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: ""
+          type: integer
+          format: int32
     get:
-      description: ""
-      parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: "integer"
       responses:
-        "400":
-          description: "Bad Request"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "id parameter is required"
-        "404":
-          description: "Not Found"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: ""
         "200":
-          description: "OK"
+          description: "User"
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserInDB"
-    put:
-      description: ""
-      parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: "integer"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserRequest"
-        required: true
-      responses:
-        "400":
-          description: "Bad Request"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "id parameter is required"
         "404":
-          description: "Not Found"
-          content:
-            '*/*':
-              schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: ""
+          $ref: "#/components/responses/UserNotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    put:
+      requestBody:
+        $ref: "#/components/requestBodies/User"
+      responses:
         "200":
-          description: "OK"
+          description: "Unquoted body: User updated. Also returned for a nonexistent user."
           content:
-            '*/*':
+            application/json:
               schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: ""
+                type: string
+              example: "User updated"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    delete:
+      responses:
+        "200":
+          description: "Unquoted body: User deleted"
+          content:
+            application/json:
+              schema:
+                type: string
+              example: "User deleted"
+        "404":
+          $ref: "#/components/responses/UserNotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 components:
+  requestBodies:
+    User:
+      required: true
+      description: "JSON body; Content-Type header is not required."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserRequest"
+  responses:
+    InternalError:
+      description: "Body: Internal error. No Content-Type header."
+    UserNotFound:
+      description: "Body: User not found. No Content-Type header."
   schemas:
     UserRequest:
-      type: "object"
-      properties:
-        name:
-          type: "string"
-        email:
-          type: "string"
-      required:
-      - "name"
-      - "email"
-    UserInDB:
-      type: "object"
+      type: object
       properties:
         id:
-          type: "integer"
-          format: "int32"
+          type: [integer, "null"]
+          format: int32
+          description: "Optional and ignored."
         name:
-          type: "string"
+          type: string
         email:
-          type: "string"
-      required:
-      - "id"
-      - "name"
-      - "email"
+          type: string
+      required: [name, email]
+    UserInDB:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        email:
+          type: string
+      required: [id, name, email]
