@@ -1,6 +1,7 @@
 package io.github.mikaojk.plugins
 
 import io.github.mikaojk.EnvironmentVariables
+import io.github.mikaojk.api.registerMetricsApi
 import io.github.mikaojk.api.registerUserApi
 import io.github.mikaojk.db.Database
 import io.github.mikaojk.services.UserService
@@ -15,6 +16,7 @@ fun Application.configureRouting() {
     val userService = UserService(database)
 
     routing {
+        registerMetricsApi()
         registerUserApi(userService)
         swaggerUI(path = "openapi", swaggerFile = "openapi/documentation.yaml")
     }

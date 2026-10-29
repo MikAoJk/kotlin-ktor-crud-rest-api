@@ -6,6 +6,19 @@ info:
 servers:
 - url: "https://kotlin_ktor_crud_rest_api"
 paths:
+  /metrics:
+    get:
+      summary: "Current JVM process resource metrics"
+      description: "Linux only. No Docker API access or database connection is required."
+      responses:
+        "200":
+          description: "Process resource sample"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessMetrics"
+        "500":
+          $ref: "#/components/responses/InternalError"
   /users:
     post:
       requestBody:
@@ -93,6 +106,28 @@ components:
     UserNotFound:
       description: "Body: User not found. No Content-Type header."
   schemas:
+    ProcessMetrics:
+      type: object
+      required: [cpu_seconds_total, memory_rss_bytes, process_id, sampled_at_unix_seconds]
+      properties:
+        cpu_seconds_total:
+          type: number
+          format: double
+          minimum: 0
+          description: "Cumulative user and system CPU time in seconds."
+        memory_rss_bytes:
+          type: integer
+          format: int64
+          minimum: 1
+          description: "Current process resident memory in bytes, from /proc/self/status."
+        process_id:
+          type: integer
+          format: int64
+          minimum: 1
+        sampled_at_unix_seconds:
+          type: number
+          format: double
+          description: "Sample timestamp as Unix seconds, including fractional seconds."
     UserRequest:
       type: object
       properties:

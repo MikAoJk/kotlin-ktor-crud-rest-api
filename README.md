@@ -48,7 +48,7 @@ Run all the tests
 ### Run the code
 Run the application
 > **Note**
-> This will not work, you need a database to run the application locally se [Run all the needed services and the application](#Run-all-the-needed-services-and-the-application)
+> The `/metrics` and `/openapi` endpoints work without a database. User endpoints require a database; see [Run all the needed services and the application](#Run-all-the-needed-services-and-the-application).
 ```bash script
 ./gradlew run
 ```
@@ -118,6 +118,22 @@ curl --location --request PUT 'http://localhost:8080/users/2' \
 Request to delete a user
 ```bash script
 curl --location --request DELETE 'http://localhost:8080/users/1'
+```
+
+Request to process resource usage
+
+```bash script
+curl 'http://localhost:8080/metrics'
+```
+
+Example response:
+```json
+{
+  "process_id": 1,
+  "cpu_seconds_total": 2.45,
+  "memory_rss_bytes": 12582912,
+  "sampled_at_unix_seconds": 1793278800.5
+}
 ```
 
 #### Api documentation

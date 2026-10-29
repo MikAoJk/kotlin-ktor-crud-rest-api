@@ -40,7 +40,7 @@ internal class UserApiTest {
         application {
             configureStatusPages()
             configureContentNegotiation()
-            routing { registerUserApi(userService) }
+            routing { registerUserApi { userService } }
         }
     }
 
